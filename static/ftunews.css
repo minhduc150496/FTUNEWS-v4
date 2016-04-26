@@ -1,56 +1,118 @@
 * {
     font-family: sans-serif;
 }
+.clear::after {
+    content: "";
+    display: block;
+    float: none;
+    clear: both;
+}
+.btn.btn-link {
+    color: white;
+}
+
+/* ratio */
+.ratio-wrapper::before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: 100%; /* default 1:1 */
+}
+.ratio-wrapper {
+    position: relative;
+}
+.ratio-wrapper .ratio-content {
+    position: absolute;
+    top:0; left:0; right:0; bottom:0;
+}
 
 /***** header *****/
+.header {
+    background: black;
+    color: white;
+}
+
 .search {
     position: relative;
+    margin: 0;
+    padding: 0;
+}
+.search input {
+    background: rgb(37,37,37);
+    font-size: 16px;
+    padding: 0 50px 0 15px;
+    width: 100%;
+    height: 48px;
 }
 .search input,
 .search input:active,
 .search input:focus,
 .search input:link {
-    width: 100%;
     border: none;
 }
-.search .fa-search {
+.search button {
     position: absolute;
-    right: 5px;
+    right: 15px;
     top: 5px;
+    font-size: 22px;
+    transform: scaleX(-1);
+    color: white;
 }
 
 .logo {
     float: left;
+    padding: 10px 18px;
 }
-.logo img {
-    width: 77px;
-    height: 77px;
-    margin: 10px 0 10px 18px;
-}
-
-.story1 .title {
-    float: left;
-    font-family: 'Open Sans';
-    font-size: 16px;
+.header .title {
     font-weight: bolder;
+    font-size: 16px;
     line-height: 18px;
-    margin: 15px 0 0 10px;
-    text-transform: uppercase;
+    float: left;
+    margin-top: 10px;
 }
-.story1 .social {
+.header .social {
+    text-align: right;
+    margin-top: 10px;
+}
+.header .social .follow {
+    position: relative;
+    top: 5px;
+}
+.header .social .fa {
+    font-size: 32px;
     float: right;
 }
-.story1::after {
-    content: "";
-    dislay: block;
-    width: 0; height: 0;
-    clear: both;
+
+/*===== MAIN =====*/
+.index .grid {
+    background: black;
 }
-.menu-box ul {
-    display: block;
-    float: none;
-    list-style-type: none;
+.grid .ratio-content {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    top:2px; left:2px; right:2px; bottom:2px;
 }
-.menu-box ul li {
-    display: inline;
+.cell-1,
+.cell-2,
+.cell-3,
+.cell-4,
+.cell-5,
+.cell-6,
+.cell-7 {
+    padding: 0;
+}
+.cell-1 .ratio-wrapper::before,
+.cell-4 .ratio-wrapper::before,
+.cell-5 .ratio-wrapper::before,
+.cell-6 .ratio-wrapper::before,
+.cell-7 .ratio-wrapper::before
+{
+    padding-top: 56.25%;
+}
+
+.cell-2 .ratio-wrapper::before,
+.cell-3 .ratio-wrapper::before
+{
+    padding-top: 112.5%;
 }

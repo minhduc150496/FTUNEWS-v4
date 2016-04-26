@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
 
-    <title>FTUNEWS</title>
+    <title>FTUNEWS-v4</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="./images/Logo ftunews tron.png" />
     <link href="./html5-boilerplate/css/bootstrap.min.css" rel="stylesheet">
@@ -18,76 +18,96 @@
     <link href="./ftunews.css" rel="stylesheet"/>
 </head>
 <body>
+    <!-- HEADER -->
+    <div class="header">
 
-    <header class="header">
-        <div class="search">
-            <form role="search" method="get" action="">
-                <input class="input" type="text" class="" placeholder="Search for article & more" name="s">
-                <i class="fa fa-search"></i>
-            </form>
-        </div>
+        <!-- Search Form -->
+        <form class="search" role="search" method="get" action="">
+            <input class="input" type="text" class="" placeholder="Search for article & more" name="s">
+            <button class="btn btn-link"><i class="fa fa-search"></i></button>
+        </form>
+        <!-- /Search Form -->
+
         <div class="logo">
-            <img src="./images/Logo%20ftunews%20tron.png">
+            <img width="80" height="80" src="images/Logo%20ftunews%20tron.png">
         </div>
-        <div class="big-stories">
-            <div class="story1">
-                <div class="title">
-                    clb truyền thông ftunews<br>
-                    'til everything is shared
-                </div>
-                <div class="social">
-                    follow us on
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-youtube"></i></a>
+
+        <div class="clear">
+            <div class="title">
+                CLB TRUYỀN THÔNG FTUNEWS<BR>
+                'TIL EVERYTHING IS SHARED
+            </div>
+            <div class="social">
+                <i class="follow">FOLLOW US ON </i>
+                <a href="#" class="btn btn-link"><i class="fa fa-facebook"></i></a>
+                <a href="#" class="btn btn-link"><i class="fa fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- /HEADER -->
+
+    <!-- MAIN -->
+    <main class="container-fluid index">
+
+        <div class="row grid">
+            <div class="col-md-6 col-sm-8 cell-1">
+                <div class="ratio-wrapper">
+                    <div class="ratio-content" style="background-image: url(images/sample.jpg)">
+
+                    </div>
                 </div>
             </div>
-            <nav class="menu-box">
-                <ul>
-                    <li class="active"><a href="">chuyển động ftu2</a></li>
-                    <li><a href="">điểm tin</a></li>
-                    <li><a href="">cảm thức</a></li>
-                    <li><a href="">phóng sự</a></li>
-                    <li><a href="">hỗ trợ sinh viên</a></li>
-                    <li><a href="">vitaminbiz</a></li>
-                </ul>
-            </nav>
-        </div>
-        <ul class="submenu-box">
-            <li class="submenu-item">
-                <ul>
-                    <li class="active"><a href="#">FTUCHARM</a></li>
-                    <li><a href="#">FTUSHINE</a></li>
-                </ul>
-                <div class="hot-posts">
-                    <div class="item">
-                        <img src="images/sample.jpg">
-                        <div>
-                            The Four Horsemen take center stage in new X-Men:
-                            Apocalypse featurette
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img>
-                        <div>
-                            The Four Horsemen take center stage in new X-Men:
-                            Apocalypse featurette
-                        </div>
+            <div class="col-md-3 col-sm-8 cell-2">
+                <div class="ratio-wrapper">
+                    <div class="ratio-content" style="background-image: url(images/sample.jpg)">
+
                     </div>
                 </div>
-                <div><a href="">TẤT CẢ</a></div>
-            </li>
-        </ul>
-    </header>
+            </div>
+            <div class="col-md-3 col-sm-8 cell-3">
+                <div class="ratio-wrapper">
+                    <div class="ratio-content" style="background-image: url(images/sample.jpg)">
 
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-8 cell-4">
+                <div class="ratio-wrapper">
+                    <div class="ratio-content" style="background-image: url(images/sample.jpg)">
 
-    <main>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-8 cell-5">
+                <div class="ratio-wrapper">
+                    <div class="ratio-content" style="background-image: url(images/sample.jpg)">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-8 cell-6">
+                <div class="ratio-wrapper">
+                    <div class="ratio-content" style="background-image: url(images/sample.jpg)">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-8 cell-7">
+                <div class="ratio-wrapper">
+                    <div class="ratio-content" style="background-image: url(images/sample.jpg)">
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
+    <!-- /MAIN -->
 
 
-    <footer>
+    <div class="footer">
 
-    </footer>
+    </div>
 
     <!-- Javascript at the bottom for fast page loading -->
     <script src="<?php echo get_template_directory_uri(); ?>/html5-boilerplate/js/jquery-1.12.1.min.js"></script>
