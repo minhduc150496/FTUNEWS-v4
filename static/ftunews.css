@@ -1,0 +1,56 @@
+* {
+    font-family: sans-serif;
+}
+
+/***** header *****/
+.search {
+    position: relative;
+}
+.search input,
+.search input:active,
+.search input:focus,
+.search input:link {
+    width: 100%;
+    border: none;
+}
+.search .fa-search {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.logo {
+    float: left;
+}
+.logo img {
+    width: 77px;
+    height: 77px;
+    margin: 10px 0 10px 18px;
+}
+
+.story1 .title {
+    float: left;
+    font-family: 'Open Sans';
+    font-size: 16px;
+    font-weight: bolder;
+    line-height: 18px;
+    margin: 15px 0 0 10px;
+    text-transform: uppercase;
+}
+.story1 .social {
+    float: right;
+}
+.story1::after {
+    content: "";
+    dislay: block;
+    width: 0; height: 0;
+    clear: both;
+}
+.menu-box ul {
+    display: block;
+    float: none;
+    list-style-type: none;
+}
+.menu-box ul li {
+    display: inline;
+}
