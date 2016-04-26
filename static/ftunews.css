@@ -1,5 +1,5 @@
 * {
-    font-family: sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 a,
 a:hover,
@@ -11,14 +11,30 @@ a:active
     color: inherit;
     text-decoration: none;
 }
+
+input,
+input:visited,
+input:active,
+input:focus,
+input:link
+{
+    border: none;
+    outline: none;
+}
+
 .clear::after {
     content: "";
     display: block;
     float: none;
     clear: both;
 }
+
 .btn.btn-link {
     color: white;
+}
+
+.main {
+    margin-bottom: 90px;
 }
 
 /* three dots at the end */
@@ -53,32 +69,23 @@ a:active
     background-size: cover;
 }
 
-/***** header *****/
+/*===== header =====*/
 .header {
     background: black;
     color: white;
 }
 
-.search {
+.header .search {
     position: relative;
     margin: 0;
     padding: 0;
 }
-.search input {
+.header .search input {
     background: rgb(37,37,37);
     font-size: 16px;
     padding: 0 50px 0 15px;
     width: 100%;
     height: 48px;
-    outline: none;
-}
-.search input,
-.search input:visited,
-.search input:active,
-.search input:focus,
-.search input:link
-{
-    border: none;
     outline: none;
 }
 .search button {
@@ -90,7 +97,7 @@ a:active
     color: white;
 }
 
-.logo {
+.header .logo {
     float: left;
     padding: 10px 18px;
 }
@@ -113,18 +120,40 @@ a:active
     font-size: 32px;
     float: right;
 }
+/*===== /HEADER =====*/
 
-/*===== MAIN =====*/
+/*===== FOOTER =====*/
+.footer {
+    background: black;
+    color: white;
+    text-align: center;
+}
+.footer ul {
+    list-style-type: none;
+    margin: 0;
+}
+.footer ul li {
+    display: inline-block;
+    padding: 20px 0 15px 0;
+    margin-right: 25px;
+}
+.footer .logo {
+    float:left;
+    margin-right: 8px;
+    margin-bottom: -10px;
+    position: relative;
+    top: -2px;
+}
+.footer .title {
+    font-size: 18px;
+    text-transform: uppercase;
+}
+/*===== /FOOTER =====*/
+
+/*===== INDEX =====*/
 .grid {
     background: black;
-}
-.grid a,
-.grid a:hover,
-.grid a:link,
-.grid a:focus
-{
     color: white;
-    text-decoration: none;
 }
 .grid .ratio-content {
     background-position: center;
@@ -141,6 +170,22 @@ a:active
 .cell-6,
 .cell-7 {
     padding: 0;
+}
+
+@media screen and (max-width: 767.99px) {
+    .grid .scroll-box {
+        width: 100%;
+        float: left;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+    .grid .scroll-box .item {
+        float: none;
+        display: inline-block;
+        white-space: normal;
+        width: 80%;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -194,25 +239,37 @@ a:active
 }
 
 .news section {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 .news section::after {
     width: 100%;
     height: 1px;
     border-bottom: solid 1px gray;
 }
+.news .ratio-wrapper {
+    margin-bottom: 25px;
+}
 .news .cate {
     color: gray;
     font-weight: bold;
+    text-transform: uppercase;
 }
 .news .title {
     font-weight: bolder;
     margin-top: 5px;
 }
 .news .detail {
-    margin-top: 25px;
+    margin-top: 0px;
     color: gray;
 }
+.news .author {
+    font-weight: bold;
+}
 .news .excerpt {
-    -webkit-line-clamp: 7; /* number of lines */
+    -webkit-line-clamp: 8; /* number of lines */
+    margin-bottom: 25px;
+}
+
+.news hr {
+    margin: 0;
 }
