@@ -301,3 +301,13 @@ input:link
 .choice .text {
     padding-left: 0;
 }
+
+/*===== CATEGORY - ARCHIVE =====*/
+.archive-title {
+    color: rgb(81,81,81);
+    font-size: 32px;
+    font-weight: 900;
+    margin-top: 20px;
+    padding-bottom: 5px;
+    border-bottom: solid 1px rgb(225,225,225);
+}
