@@ -1,5 +1,6 @@
 * {
     font-family: "Open Sans", sans-serif;
+    word-wrap: break-word;
 }
 a,
 a:hover,
@@ -310,4 +311,71 @@ input:link
     margin-top: 20px;
     padding-bottom: 5px;
     border-bottom: solid 1px rgb(225,225,225);
+}
+
+
+/*===== SINGLE =====*/
+.single-post .category {
+    color: white;
+    background: black;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 2px 8px;
+}
+.single-post .title {
+    color: black;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bolder;
+    margin-top: 15px;
+}
+.single-post .detail {
+    text-align: center;
+    margin-top: 16px;
+}
+.single-post .content {
+    margin: 40px auto 0 auto;
+    text-align: justify;
+}
+
+@media screen and (min-width: 992px) {
+    .single-post .content,
+    .single-post .more {
+        width: 70%;
+    }
+}
+
+.single-post .content img,
+.single-post .content div {
+    max-width: 100% !important;
+}
+
+.more {
+    border-top: solid 1px black;
+    margin: 0 auto;
+}
+.more .head {
+    margin-top: 22px;
+    text-align: center;
+    font-weight: bold;
+}
+.more .category {
+    color: white;
+    background: black;
+    border: solid 1px black;
+    padding: 2px 15px;
+}
+.more .author {
+    color: black;
+    background: white;
+    border: solid 1px black;
+    padding: 2px 15px;
+}
+
+.slick-more {
+    margin-top: 22px;
+}
+.slick-more .item {
+    padding: 5px;
 }
