@@ -7,17 +7,22 @@
  */
 $(document).ready(function () {
 
-    /* show/hide mega menu */
+    /* show mega menu */
     $(".menu-item > a").mouseenter(function() {
-        $(this).parent().children(".mega-menu").fadeIn(250);
+        var t = $(this).parent().children(".mega-menu");
+        t.css("z-index",200);
+        t.fadeIn(250);
     });
+    /* hide mega menu */
     $(".menu-item").mouseleave(function() {
-        $(this).children(".mega-menu").fadeOut(250);
+        var t = $(this).children(".mega-menu");
+        t.css("z-index",100);
+        t.fadeOut(250);
     });
+    /* toggle harmburger */    
     $(".mobi-menu .btn-harmburger").click(function() {
         $(".mobi-menu .body").slideToggle(250);
     })
-
 /*
     $(".mega-prev").mouseenter(function() {
         var n = $(this).parent().children(".wrapper").children().length;
