@@ -23,10 +23,11 @@ $(document).ready(function () {
     $(".mobi-menu .btn-harmburger").click(function() {
         $(".mobi-menu .body").slideToggle(250);
     })
-
+/*
     $("a.three-dots").hover(function(){
         $(this).css("color","orange !important")
     })
+    /**/
 /*
     $(".mega-prev").mouseenter(function() {
         var n = $(this).parent().children(".wrapper").children().length;
