@@ -44,14 +44,25 @@ input:link
     margin-bottom: 90px;
 }
 
+@media screen and (max-width: 767px) {
+    .main > .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
 /* three dots at the end */
 .three-dots {
     display: block !important;
     /* Fallback for non-webkit */
     display: -webkit-box !important;
     /* Fallback for non-webkit */
+    line-clamp: 3;
     -webkit-line-clamp: 3; /* number of lines */
     -webkit-box-orient: vertical;
+    font-size: 16px;
+    line-height: 22px;
+    max-height: 66px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -119,6 +130,12 @@ input:link
 .header .social {
     text-align: right;
     margin-top: 10px;
+    display: none;
+}
+@media screen and (min-width: 992px) {
+    .header .social {
+        display: block;
+    }
 }
 .header .social .follow {
     position: relative;
@@ -132,6 +149,12 @@ input:link
 .menu {
     background: none;
     margin-top: 14px;
+    display: none;
+}
+@media screen and (min-width: 992px) {
+    .menu {
+        display: block;
+    }
 }
 .menu .menu-item {
     display: inline-block;
@@ -154,44 +177,77 @@ input:link
     padding: 25px 15px 15px 15px;
     display: none;
 }
-.menu-item:hover .mega-menu {
-}
 
 .slick-mega {
     height: 100%;
     width: auto;
     background: none;
     margin-left: 200px;
+    overflow: hidden;
 }
-.mega-menu .slick-mega .item {
+.slick-mega .wrapper {
+    white-space: nowrap;
+}
+.slick-mega .item {
     margin-right: 50px;
     width: 162px;
-    float: left;
+    display: inline-block;
 }
-.mega-menu .title {
+.slick-mega .title {
+    height: 46px;
+    white-space: normal;
     font-size: 13px;
     line-height: 15px;
     font-weight: bold;
     -webkit-line-clamp: 3; /* number of lines */
 }
 
-.sub-menu {
+.menu .sub-menu {
     float:left;
     width:190px;
     height: 100%;
 }
-.sub-menu li i {
+.menu .sub-menu li i {
     font-size: 10px;
     visibility: hidden;
     position: relative;
     top: -1px;
 }
-.sub-menu li:hover {
+.menu .sub-menu li:hover {
     font-weight: bold;
     cursor: pointer;
 }
-.sub-menu li:hover i {
+.menu .sub-menu li:hover i {
     visibility: visible;
+}
+
+.mobi-menu {
+    background: rgb(17,17,17);
+    position: relative;
+    display: block;
+}
+@media screen and (min-width: 992px) {
+    .mobi-menu {
+        display: none;
+    }
+}
+.mobi-menu .btn-harmburger {
+    position: absolute;
+    top: -40px;
+    right: 15px;
+    color: white;
+    font-size: 25px;
+    line-height: 25px;
+}
+.mobi-menu .body {
+    display: none;
+}
+.mobi-menu ul {
+    padding-left: 15px;
+}
+.mobi-menu li a {
+    display: block;
+    padding: 10px 0 ;
 }
 
 /*===== /HEADER =====*/
@@ -206,13 +262,25 @@ input:link
     list-style-type: none;
     margin: 0;
 }
-.footer ul li {
-    display: inline-block;
+.footer li {
+    display: block;
     font-size: 12px;
     text-transform: uppercase;
-    padding: 20px 0 15px 0;
-    margin-right: 25px;
+    text-align: left;
+    padding: 20px 20px 0 20px;
 }
+.footer li:last-child {
+    text-align: right;
+    padding-bottom: 20px;
+}
+@media screen and (min-width: 768px) {
+    .footer li {
+        display: inline-block;
+        margin-right: 25px;
+        padding: 20px 0 15px 0px;
+    }
+}
+
 .footer .logo {
     float:left;
     margin-right: 8px;
@@ -248,19 +316,19 @@ input:link
     padding: 0;
 }
 
-@media screen and (max-width: 767.99px) {
+@media screen and (max-width: 767px) {
     .grid .scroll-box {
         width: 100%;
-        float: left;
         overflow-x: scroll;
         overflow-y: hidden;
         white-space: nowrap;
     }
+
     .grid .scroll-box .item {
-        float: none;
         display: inline-block;
         white-space: normal;
         width: 80%;
+        margin-bottom: -5px;
     }
 }
 
@@ -309,16 +377,22 @@ input:link
 .grid .title {
     margin-top: 10px;
     display: block;
+    max-height: 80px;
     font-size: 20px;
+    line-height: 26px;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-.news section {
+.news section,
+.news .section {
     margin-top: 30px;
 }
 .news .section-1 .excerpt {
     -webkit-line-clamp: 7; /* number of lines */
+    font-size: 16px;
+    line-height: 22px;
+    max-height: 154px;
 }
 .news .ratio-wrapper {
     margin-bottom: 25px;
@@ -331,6 +405,8 @@ input:link
 .news .title {
     font-weight: bolder;
     margin-top: 5px;
+    font-size: 25px;
+    line-height: 30px;
 }
 .news .detail {
     margin-top: 0px;
@@ -343,6 +419,8 @@ input:link
     -webkit-line-clamp: 5; /* number of lines */
     margin-bottom: 25px;
     font-size: 16px;
+    line-height: 22px;
+    max-height: 110px;
 }
 
 .news hr {
@@ -352,18 +430,27 @@ input:link
 
 /* choice */
 .news .choice {
+    margin-top: 20px;
 }
 
-.choice section {
+.choice .section {
     margin: 17px -15px 10px -15px;
-    max-width: 450px;
+}
+.choice .inner {
+    max-width: 400px;
+    margin: 0 auto;
+}
+.choice .ratio-wrapper {
+    margin-bottom: 10px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
     .news .choice {
         margin-top: 220px;
     }
-    .choice section {
+}
+@media screen and (min-width: 768px) {
+    .choice .inner {
         max-width: none;
     }
 }
@@ -372,8 +459,32 @@ input:link
     font-weight:bold;
     text-transform: uppercase;
 }
-.choice .text {
-    padding-left: 0;
+@media screen and (min-width:738px) {
+    .choice .text {
+        padding-left: 0;
+    }
+}
+.choice .title {
+    display: block;
+    font-size: 14px;
+    line-height: 16px;
+    max-height: 50px; /* 3 lines */
+    font-weight: bold;
+    margin: 2px 0 0 0;
+}
+.banner-drthanh {
+    position: relative;
+    margin-top: 23px;
+}
+.banner-drthanh::after {
+    content:"";
+    display: block;
+    padding-bottom: 97%;
+}
+.banner-drthanh embed {
+    position: absolute;
+    top:0; left:0;
+    width:100%; height: 100%
 }
 
 /*===== CATEGORY - ARCHIVE =====*/
@@ -388,6 +499,13 @@ input:link
 
 
 /*===== SINGLE =====*/
+.single-banner::before {
+    padding-top: 33.33%; /* ratio 3:1 */
+}
+.main .container.single-post {
+    padding-left: 15px;
+    padding-right: 15px;
+}
 .single-post .category {
     color: white;
     background: black;
@@ -410,6 +528,7 @@ input:link
 .single-post .content {
     margin: 40px auto 0 auto;
     text-align: justify;
+    font-family: "Noto Serif";
 }
 
 @media screen and (min-width: 992px) {
