@@ -11,7 +11,7 @@
     <ul>
         <li class="clear">
             <img class="logo" width="30" height="30" src="<?php echo get_template_directory_uri()?>/images/Logo%20ftunews%20tron.png" alt="">
-            <a class="title" href="#">FTUNEWS</a>
+            <a class="title" href="<?php echo get_site_url()?>">FTUNEWS</a>
         </li>
         <li>
             <a href="#">contact us</a>

@@ -93,12 +93,80 @@ function set_posts_per_page($query)
     return $query;
 }
 
+// Register header menu
+/*
+function register_my_menu() {
+    register_nav_menu('header-menu',__( 'Header Menu' ));
+}
+add_action( 'init', 'register_my_menu' );
+/**/
+
+/**
+ * @param $ID
+ * @return null
+ */
+function get_last_category($ID)
+{
+    $cats = get_the_category($ID);
+    if (!empty($cats)) return $cats[count($cats) - 1];
+    return null;
+}
+
+/**
+ * Get last category Name
+ * @param $ID
+ * @return string
+ */
+function get_last_category_name($ID)
+{
+    $catName = '';
+    $cat = get_last_category($ID);
+    if ($cat != null) $catName = $cat->cat_name;
+    return $catName;
+}
+
+/**
+ * Get last category Url
+ * @param $ID
+ * @return string
+ */
+function get_last_category_url($ID)
+{
+    $catUrl = '';
+    $cat = get_last_category($ID);
+    if ($cat != null) $catUrl = get_category_link($cat->cat_ID);
+    return $catUrl;
+}
+
+function the_grid_cell_inner()
+{
+    ?>
+    <div class="ratio-wrapper">
+        <div class="ratio-content" style="background-image: url(<?php echo get_thumbnail_photo_url(get_the_ID()) ?>)">
+            <div class="d-table">
+                <div class="table-cell">
+                    <a href="<?php get_last_category_url(get_the_ID()) ?>"
+                       class="cate"><?php echo get_last_category_name(get_the_ID()) ?></a>
+                    <?php if (get_the_time('d m Y') == date('d m Y')): ?>
+                        <div class="new">NEW</div>
+                    <?php endif; ?>
+                    <a href="<?php the_permalink()?>" class="three-dots title">
+                        <?php the_title() ?>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
 /**
  * Get posts in same category
  * @param $postsNumber
  * @return array
  */
-function get_posts_in_same_category($postsNumber) {
+function get_posts_in_same_category($postsNumber)
+{
     global $post;
     $cat_ID = array();
     $categories = get_the_category(); //get all categories for this post
@@ -122,7 +190,8 @@ function get_posts_in_same_category($postsNumber) {
  * @param $postsNumber
  * @return array
  */
-function get_posts_in_same_author($postsNumber) {
+function get_posts_in_same_author($postsNumber)
+{
     global $post;
     $args = array(
         'orderby' => 'date',
@@ -134,6 +203,34 @@ function get_posts_in_same_author($postsNumber) {
     ); // post__not_in will exclude the post we are displaying
     $au_posts = get_posts($args);
     return $au_posts;
+}
+
+/**
+ * @return array of root categories
+ */
+function get_root_categories() {
+    $uncat = get_cat_ID('Uncategorized');
+    $args = array (
+        'hide_empty' => false,
+        'exclude' => array($uncat)
+    );
+    $cats = get_categories($args);
+    $res = array();
+    foreach($cats as $cat) {
+        $p = get_category_parents($cat->cat_ID, false, '', false);
+        if ($p == $cat->cat_name) array_push($res, $cat);
+    }
+    return $res;
+}
+
+/**
+ * Get array of children cats' IDs
+ * @param $ID
+ * @return array|WP_Error
+ */
+function get_children_categories($ID) {
+    $res = get_term_children($ID,'category');
+    return $res;
 }
 
 /**
@@ -154,7 +251,6 @@ function the_load_more_pattern()
         rewind_posts();
     endif;
 }
-
 
 
 /**
@@ -182,7 +278,8 @@ function catch_that_image()
  * @param $ID
  * @return bool|false|string
  */
-function get_thumbnail_photo_url($ID) {
+function get_thumbnail_photo_url($ID)
+{
     $thumb_url = false; // thumb url
     if (has_post_thumbnail($ID)) $thumb_url = get_the_post_thumbnail_url($ID, 'large');
     else {

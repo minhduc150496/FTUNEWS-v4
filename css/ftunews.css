@@ -17,7 +17,8 @@ a:active
     text-decoration: none;
 }
 a:hover {
-    color: rgb(254,167,2);
+    /*color: rgb(254,167,2);/**/
+    text-decoration: underline;/**/
 }
 ul {
     list-style-type: none;
@@ -89,6 +90,7 @@ a.three-dots:hover
 }
 .ratio-wrapper {
     position: relative;
+    overflow: hidden;
 }
 .ratio-wrapper .ratio-content {
     position: absolute;
@@ -145,14 +147,14 @@ a.three-dots:hover
 .header .title:first-line {
     font-weight: normal;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1199px) {
     .header .title {
         padding-top: 12px !important;
         font-size: 10px !important;
         line-height: 12px !important;
     }
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1199px) {
     .header .logo {
         padding-right: 5px;
     }
@@ -173,7 +175,7 @@ a.three-dots:hover
     margin-right: 12px;
     display: none;
 }
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1200px) {
     .header .social {
         display: block;
     }
@@ -195,26 +197,27 @@ a.three-dots:hover
     margin-top: 14px;
     display: none;
 }
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1200px) {
     .menu {
         display: block;
     }
 }
 .menu .menu-item {
     display: inline-block;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 .menu .menu-item > a {
     padding: 0 0 8px 0;
     border-bottom: solid 3px black;
     text-transform: uppercase;
+    font-size: 12px;
 }
 .menu .menu-item:hover > a {
     border-bottom-color: rgb(254,167,2);
 }
 .mega-menu {
-    background: white;
-    color: black;
+    background: rgba(27,27,27,0.95);
+    color: white;
     position: absolute;
     top: 100%; left: 0; right: 0;
     height: 200px;
@@ -241,7 +244,6 @@ a.three-dots:hover
     white-space: nowrap;
 }
 .slick-mega .item {
-    display: block;
     margin-right: 50px;
     width: 162px;
     display: inline-block;
@@ -259,6 +261,7 @@ a.three-dots:hover
     float:left;
     width:190px;
     height: 100%;
+    font-weight: bold;
 }
 .menu .sub-menu li i {
     font-size: 10px;
@@ -267,7 +270,7 @@ a.three-dots:hover
     top: -1px;
 }
 .menu .sub-menu li:hover {
-    color: rgb(254,167,2);
+    /*color: rgb(254,167,2);/**/
     font-weight: bold;
     cursor: pointer;
 }
@@ -280,7 +283,7 @@ a.three-dots:hover
     position: relative;
     display: block;
 }
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1200px) {
     .mobi-menu {
         display: none;
     }
@@ -376,12 +379,14 @@ a.three-dots:hover
         overflow-x: scroll;
         overflow-y: hidden;
         white-space: nowrap;
+        font-size: 0;
     }
     .grid .scroll-box .item {
         display: inline-block;
         white-space: normal;
         width: 80%;
         margin-bottom: -5px;
+        font-size: inherit;
     }
     .grid .scroll-box .ratio-wrapper::before {
         padding-top: 70%;
@@ -441,7 +446,7 @@ a.three-dots:hover
     font-weight: bold;
     text-transform: uppercase;
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1199px) {
     .grid .title {
         font-size: 16px;
         line-height: 22px;
@@ -561,7 +566,9 @@ a.three-dots:hover
 .choice hr {
     margin-top: 0;
 }
-
+.banner-fk img {
+    max-width: 100%;
+}
 .banner-drthanh {
     position: relative;
     margin-top: 23px;

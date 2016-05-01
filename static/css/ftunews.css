@@ -591,7 +591,6 @@ input:link
     /* Fallback for non-webkit */
     display: -webkit-box !important;
     /* Fallback for non-webkit */
-    line-clamp: 3;
     -webkit-line-clamp: 3; /* number of lines */
     -webkit-box-orient: vertical;
     font-size: 16px;

@@ -41,9 +41,10 @@
 
     <?php wp_head(); ?>
 
-    <link href="<?php echo get_template_directory_uri()?>/images/Logo%20ftunews%20tron.png" rel="shortcut icon" type="image/x-icon"/>
-    <link href="<?php echo get_template_directory_uri()?>/html5-boilerplate/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo get_template_directory_uri()?>/html5-boilerplate/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo get_template_directory_uri() ?>/images/Logo%20ftunews%20tron.png" rel="shortcut icon"
+          type="image/x-icon"/>
+    <link href="<?php echo get_template_directory_uri() ?>/html5-boilerplate/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo get_template_directory_uri() ?>/html5-boilerplate/css/font-awesome.min.css" rel="stylesheet">
 
     <link href='https://fonts.googleapis.com/css?family=Roboto&subset=latin,vietnamese' rel='stylesheet'
           type='text/css'>
@@ -52,9 +53,9 @@
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro&subset=latin,vietnamese' rel='stylesheet'
           type='text/css'>
 
-    <link href="<?php echo get_template_directory_uri()?>/html5-boilerplate/slick/slick.css" rel="stylesheet">
-    <link href="<?php echo get_template_directory_uri()?>/css/WP-default.css" rel="stylesheet"/>
-    <link href="<?php echo get_template_directory_uri()?>/css/ftunews.css" rel="stylesheet"/>
+    <link href="<?php echo get_template_directory_uri() ?>/html5-boilerplate/slick/slick.css" rel="stylesheet">
+    <link href="<?php echo get_template_directory_uri() ?>/css/WP-default.css" rel="stylesheet"/>
+    <link href="<?php echo get_template_directory_uri() ?>/css/ftunews.css" rel="stylesheet"/>
 
 </head>
 <body <?php body_class(); ?>>
@@ -64,6 +65,23 @@
     experience this site.</p>
 <![endif]-->
 
+<?php
+/*
+$uncat = get_cat_ID('Uncategorized');
+$args = array(
+    'hide_empty' => false,
+    'exclude' => array($uncat)
+);
+$cats = get_categories($args);
+foreach ($cats as $cat) {
+    $p = get_category_parents($cat->cat_ID, false, '', false);
+    if ($p == $cat->cat_name) echo $cat->cat_name . " " . $cat->cat_ID . "<br> ";
+}
+$cats = get_term_children(get_cat_ID('Cảm thức'), 'category');
+foreach ($cats as $cat) {
+    echo get_cat_name($cat);
+}/**/
+?>
 
 <!-- HEADER -->
 <div class="header clear">
@@ -77,8 +95,9 @@
 
     <!-- Logo -->
     <div class="logo">
-        <a href="<?php get_site_url() ?>">
-            <img width="80" height="80" src="<?php echo get_template_directory_uri()?>/images/Logo%20ftunews%20tron.png" alt="">
+        <a href="<?php echo get_site_url() ?>">
+            <img width="80" height="80"
+                 src="<?php echo get_template_directory_uri() ?>/images/Logo%20ftunews%20tron.png" alt="">
         </a>
     </div>
     <!-- /Logo -->
@@ -91,447 +110,62 @@
         </div>
         <div class="social">
             <i class="follow">FOLLOW US ON </i>
-            <a href="#" class="btn btn-link"><i class="fa fa-facebook"></i></a>
-            <a href="#" class="btn btn-link"><i class="fa fa-youtube"></i></a>
+            <a href="https://www.facebook.com/iloveftunews" class="btn btn-link"><i class="fa fa-facebook"></i></a>
+            <a href="https://www.youtube.com/user/ftunews" class="btn btn-link"><i class="fa fa-youtube"></i></a>
         </div>
-        <div class="menu">
+        <div class="menu header-menu">
             <ul>
-                <li class="menu-item">
-                    <a class="item-a" href="#">chuyển động ftu2</a>
-                    <div class="mega-menu clear">
-                        <!-- sub menu -->
-                        <div class="sub-menu">
-                            <ul>
-                                <li>
-                                    <a href="#">FTUCHARM <i class="fa fa-play"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#">FTUSHINE <i class="fa fa-play"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a class="all" href="#">TẤT CẢ</a>
-                        <!-- /sub menu -->
-                        <!-- slick mega -->
-                        <div class="slick-mega clear">
-                            <div class="wrapper">
-                                <a href="#" class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
+                <?php
+                $cats = get_root_categories();
+                foreach ($cats as $cat):
+                    ?>
+                    <li class="menu-item">
+                        <a class="item-a" href="<?php echo get_category_link($cat->cat_ID) ?>"><?php echo $cat->cat_name ?></a>
+                        <div class="mega-menu clear">
+                            <!-- sub menu -->
+                            <div class="sub-menu">
+                                <ul>
+                                    <?php
+                                    $subs = get_children_categories($cat->cat_ID);
+                                    foreach ($subs as $sub):
+                                    ?>
+                                    <li>
+                                        <a href="<?php echo get_category_link($sub) ?>"><?php echo get_cat_name($sub)?> <i class="fa fa-play"></i></a>
+                                    </li>
+                                    <?php endforeach ?>
+                                </ul>
+                            </div>
+                            <a class="all" href="<?php echo get_category_link($cat->cat_ID) ?>">TẤT CẢ</a>
+                            <!-- /sub menu -->
+                            <!-- slick mega -->
+                            <div class="slick-mega clear">
+                                <div class="wrapper">
+                                    <?php
+                                    $args = array(
+                                        'posts_per_page' => 5,
+                                        'category' => $cat->cat_ID,
+                                        'orderby' => 'data',
+                                        'order' => 'DESC',
+                                    );
+                                    $ps = get_posts($args);
+                                    foreach ($ps as $p):
+
+                                    ?>
+                                    <a href="<?php echo get_permalink($p->ID) ?>" class="item">
+                                        <div class="ratio-wrapper">
+                                            <div class="ratio-content img"
+                                                 style="background-image: url(<?php echo get_thumbnail_photo_url($p->ID)?>)">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <h5 class="three-dots title">The Four Horsemen</h5>
-                                </a>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
+                                        <h5 class="three-dots title"><?php echo $p->post_name ?></h5>
+                                    </a>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
+                            <!-- /slick mega -->
                         </div>
-                        <!-- /slick mega -->
-                    </div>
-                </li>
-                <li class="menu-item">
-                    <a href="#">cảm thức</a>
-                    <div class="mega-menu clear">
-                        <!-- sub menu -->
-                        <div class="sub-menu">
-                            <ul>
-                                <li>
-                                    <a href="#">Cà phê thư <i class="fa fa-play"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#">Trà đá thư <i class="fa fa-play"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#">Hủ tiếu thư <i class="fa fa-play"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /sub menu -->
-                        <!-- slick mega -->
-                        <div class="slick-mega clear">
-                            <div class="wrapper">
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /slick mega -->
-                    </div>
-                </li>
-                <li class="menu-item">
-                    <a href="#">phóng sự</a>
-                    <div class="mega-menu clear">
-                        <!-- sub menu -->
-                        <div class="sub-menu">
-                            <ul>
-                                <li>
-                                    <a href="#">Phóng sự 1 <i class="fa fa-play"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#">Phóng sự 2 <i class="fa fa-play"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /sub menu -->
-                        <!-- slick mega -->
-                        <div class="slick-mega clear">
-                            <div class="wrapper">
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /slick mega -->
-                    </div>
-                </li>
-                <li class="menu-item">
-                    <a href="#">điểm tin</a>
-                    <div class="mega-menu clear">
-                        <!-- sub menu -->
-                        <div class="sub-menu">
-                            <ul>
-                                <li>
-                                    <a href="#">Điểm tin 1 <i class="fa fa-play"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#">Điểm tin 2 <i class="fa fa-play"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /sub menu -->
-                        <!-- slick mega -->
-                        <div class="slick-mega clear">
-                            <div class="wrapper">
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /slick mega -->
-                    </div>
-                </li>
-                <li class="menu-item">
-                    <a href="#">hỗ trợ sinh viên</a>
-                    <div class="mega-menu clear">
-                        <!-- sub menu -->
-                        <div class="sub-menu">
-                            <ul>
-                                <li>
-                                    <a href="#">Hỗ trợ 1<i class="fa fa-play"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#">Hỗ trợ 2 <i class="fa fa-play"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /sub menu -->
-                        <!-- slick mega -->
-                        <div class="slick-mega clear">
-                            <div class="wrapper">
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /slick mega -->
-                    </div>
-                </li>
-                <li class="menu-item">
-                    <a href="#">vitamin biz</a>
-                    <div class="mega-menu clear">
-                        <!-- sub menu -->
-                        <div class="sub-menu">
-                            <ul>
-                                <li>
-                                    <a href="#">Vitamin A <i class="fa fa-play"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#">Vitamin B <i class="fa fa-play"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /sub menu -->
-                        <!-- slick mega -->
-                        <div class="slick-mega clear">
-                            <div class="wrapper">
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                                <div class="item">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
-                                        </div>
-                                    </div>
-                                    <h5 class="three-dots title"><a href="#">The Four Horsemen take center stage in new X-Men: Apocalypse featurette</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /slick mega -->
-                    </div>
-                </li>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>

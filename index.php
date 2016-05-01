@@ -7,105 +7,270 @@
 
 get_header();
 
-the_load_more_pattern();
 if (have_posts()):
-  $cont = true; // continuing flag
-?>
-
-
-<!-- first look/ grid top -->
-<div class="container-fluid ">
-  <div class="row gridtop">
-    <?php the_gridtop_item('col-lg-15 col-sm-3 col-xs-12 no-padding gridtop-item',
-        'display-block background-size-position ratio-1-1 ratio-2-1-xs') ?>
-    <?php the_gridtop_item('col-lg-25 col-sm-6 col-xs-6 no-padding gridtop-item',
-        'display-block background-size-position ratio-2-1 ratio-1-1-xs') ?>
-    <?php the_gridtop_item('col-lg-15 col-sm-3 col-xs-6 no-padding gridtop-item',
-        'display-block background-size-position ratio-1-1') ?>
-    <?php the_gridtop_item('col-lg-15 col-sm-3 col-xs-6 no-padding gridtop-item',
-        'display-block background-size-position ratio-1-1') ?>
-    <?php the_gridtop_item('col-lg-15 col-sm-3 col-xs-6 no-padding gridtop-item',
-        'display-block background-size-position ratio-1-1') ?>
-    <?php the_gridtop_item('col-lg-15 col-sm-3 col-xs-6 no-padding gridtop-item',
-        'display-block background-size-position ratio-1-1') ?>
-    <?php the_gridtop_item('col-lg-15 col-sm-3 col-xs-6 no-padding gridtop-item',
-        'display-block background-size-position ratio-1-1') ?>
-
-    <?php the_gridtop_item('col-lg-15 col-sm-6 col-xs-6 no-padding gridtop-item',
-        'display-block background-size-position ratio-1-1 ratio-2-1-md ratio-1-1-xs') ?>
-    <?php the_gridtop_item('col-lg-15 col-sm-6 col-xs-6 no-padding gridtop-item',
-        'display-block background-size-position ratio-1-1 ratio-2-1-md ratio-1-1-xs') ?>
-
-  </div>
-</div>
-
-
-    <!-- MAIN -->
-<main class="container load-more-container">
-    <!-- SECTION 1: -->
-    <?php
-      if ($cont)
-        $cont = $cont && the_vertical_thumbnail_row();
-    ?>
-
-    <!-- SECTION 2: Videos -->
-    <div class="row section2">
-    </div>
-
-    <!-- SECTION 3: 3 horizon, shortnews -->
-    <div class="row section3 section-gap">
-      <div class="col-sm-8">
-        <?php
-          if ($cont)
-            for($i = 0; $i<3 && ($cont = $cont && the_horizontal_thumbnail()); $i++);
+    while (true):
         ?>
-      </div>
-      <div class="col-sm-4">
-          <img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/images/FK%20banner%20FTU2.jpg">
-      </div>
-    </div>
 
-    <div class="section4">
-      <?php
-        if ($cont)
-          $cont = $cont && the_banner_post();
-      ?>
-    </div>
+        <!-- BODY -->
+        <div class="main">
 
-    <!-- SECTION 5: 3 vertical -->
-    <?php
-      if ($cont)
-        $cont = $cont && the_vertical_thumbnail_row();
-    ?>
+            <!-- Grid -->
+            <div class="container-fluid grid">
+                <div class="row">
+                    <?php if (!have_posts()) break;
+                    the_post() ?>
+                    <!-- Cell 1 -->
+                    <div class="col-lg-6 col-sm-8 cell-1">
+                        <?php the_grid_cell_inner() ?>
+                    </div>
+                    <!-- /Cell 1 -->
+                    <?php if (!have_posts()) break;
+                    the_post() ?>
+                    <!-- Cell 2 -->
+                    <div class="col-lg-3 col-sm-4 cell-2">
+                        <?php the_grid_cell_inner() ?>
+                    </div>
+                    <!-- /Cell 2 -->
+                    <?php if (!have_posts()) break;
+                    the_post() ?>
+                    <!-- Cell 3 -->
+                    <div class="col-lg-3 col-sm-4 cell-3">
+                        <?php the_grid_cell_inner() ?>
+                    </div>
+                    <!-- /Cell 3 -->
+                    <div class="scroll-box">
+                        <?php if (!have_posts()) break;
+                        the_post() ?>
+                        <!-- Cell 4 -->
+                        <div class="item col-lg-3 col-sm-4 cell-4">
+                            <?php the_grid_cell_inner() ?>
+                        </div>
+                        <!-- /Cell 4 -->
+                        <?php if (!have_posts()) break;
+                        the_post() ?>
+                        <!-- Cell 5 -->
+                        <div class="item col-lg-3 col-sm-4 cell-5">
+                            <?php the_grid_cell_inner() ?>
+                        </div>
+                        <!-- /Cell 5 -->
+                        <?php if (!have_posts()) break;
+                        the_post() ?>
+                        <!-- Cell 6 -->
+                        <div class="item col-lg-3 col-sm-4 cell-6">
+                            <?php the_grid_cell_inner() ?>
+                        </div>
+                        <!-- /Cell 6 -->
+                        <?php if (!have_posts()) break;
+                        the_post() ?>
+                        <!-- Cell 7 -->
+                        <div class="item col-lg-3 col-sm-4 cell-7">
+                            <?php the_grid_cell_inner() ?>
+                        </div>
+                        <!-- /Cell 7 -->
+                    </div>
+                </div>
+            </div>
+            <!-- /Grid -->
 
-    <!-- SECTION 6: 3 horizon -->
-    <div class="row section6 section-gap">
-      <div class="col-sm-4">
-          <div class="banner-drthanh">
-              <embed style="position: absolute; top:0; left:0; width:100%; height: 100%" src="<?php echo get_template_directory_uri(); ?>/flash/PHN_350x340.swf"></embed>
-          </div>
-      </div>
-      <div class="col-sm-8">
+            <!-- News -->
+            <div class="container news">
+
+                <!-- choice -->
+                <div class="col-md-4 col-md-push-8 choice">
+                    <div class="inner">
+                        <h5 class="head">EDITORS' CHOICE</h5>
+
+                        <div class="section row">
+                            <div class="col-xs-5 image">
+                                <div class="ratio-wrapper">
+                                    <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-7 text">
+                                <a class="cate" href="#">phóng sự</a>
+                                <a class="three-dots title" href="#">Samsung bán được hơn 10 triệu chiếc Galaxy S7 và
+                                    Galaxy
+                                    S7
+                                    edge trong tháng 3? Samsung bán được hơn 10 triệu chiếc Galaxy S7 và Galaxy S7
+                                    edge trong tháng 3?</a>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="section row">
+                            <div class="col-xs-5 image">
+                                <div class="ratio-wrapper">
+                                    <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-7 text">
+                                <a class="cate" href="#">phóng sự</a>
+                                <a class="three-dots title" href="#">Samsung bán được hơn 10 triệu chiếc Galaxy S7 và
+                                    Galaxy
+                                    S7
+                                    edge trong tháng 3?</a>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="section row">
+                            <div class="col-xs-5 image">
+                                <div class="ratio-wrapper">
+                                    <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-7 text">
+                                <a class="cate" href="#">phóng sự</a>
+                                <a class="three-dots title" href="#">Samsung bán được hơn 10 triệu chiếc Galaxy S7 và
+                                    Galaxy
+                                    S7
+                                    edge trong tháng 3?</a>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="section row">
+                            <div class="col-xs-5 image">
+                                <div class="ratio-wrapper">
+                                    <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-7 text">
+                                <a class="cate" href="#">phóng sự</a>
+                                <a class="three-dots title" href="#">Samsung bán được hơn 10 triệu chiếc Galaxy S7 và
+                                    Galaxy
+                                    S7
+                                    edge trong tháng 3?</a>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="section row">
+                            <div class="col-xs-5 image">
+                                <div class="ratio-wrapper">
+                                    <div class="ratio-content img" style="background-image: url(images/sample.jpg)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-7 text">
+                                <a class="cate" href="#">phóng sự</a>
+                                <a class="three-dots title" href="#">Samsung bán được hơn 10 triệu chiếc Galaxy S7 và
+                                    Galaxy
+                                    S7
+                                    edge trong tháng 3?</a>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!-- banner FK -->
+                        <div class="section row">
+                            <div class="col-md-12 banner-fk">
+                                <a href="http://freshkon.com/"><img
+                                        src="<?php echo get_template_directory_uri() ?>/images/FK%20banner%20FTU2.jpg"
+                                        alt=""></a>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!-- banner Dr Thanh -->
+                        <div class="section row">
+                            <div class="col-md-12">
+                                <div class="banner-drthanh"
+                                     onmouseup="document.location='http://tradrthanh.com/pho-hang-nong/'">
+                                    <embed src="<?php echo get_template_directory_uri() ?>/flash/PHN_350x340.swf">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /choice -->
+
+                <!-- main -->
+                <div class="col-md-8 col-md-pull-4 main-news">
+
+                    <?php if (!have_posts()) break;
+                    the_post() ?>
+
+                    <section class="section-1">
+                        <header>
+                            <h3 class="title">
+                                <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                            </h3>
+                        </header>
+                        <div class="ratio-wrapper">
+                            <div class="ratio-content img"
+                                 style="background-image: url(<?php echo get_thumbnail_photo_url(get_the_ID()) ?>)">
+                            </div>
+                        </div>
+                        <p class="detail">
+                            BY <span class="author"><?php the_author_link() ?></span>
+                            | <?php the_time('j \t\h\á\n\g n, Y') ?>
+                        </p>
+                        <p class="three-dots excerpt">
+                            <?php echo get_the_excerpt() ?>
+                        </p>
+                    </section>
+
+                    <?php
+                    for ($i = 0; $i < 5; $i++):
+                        if (!have_posts()) break;
+                        the_post();
+                        ?>
+
+                        <hr>
+                        <section>
+                            <div class="cate"><a
+                                    href="<?php get_last_category_url(get_the_ID()) ?>"><?php get_last_category_name(get_the_ID()) ?></a>
+                            </div>
+                            <header>
+                                <h3 class="title">
+                                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+                                </h3>
+                            </header>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="ratio-wrapper">
+                                        <div class="ratio-content img"
+                                             style="background-image: url(<?php echo get_thumbnail_photo_url(get_the_ID()) ?>)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 text">
+                                    <p class="detail">
+                                        BY <span class="author"><?php the_author_link() ?></span>
+                                        | <?php the_time('j \t\h\á\n\g n, Y') ?>
+                                    </p>
+                                    <p class="three-dots excerpt">
+                                        <?php echo get_the_excerpt() ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+
+                    <?php endfor; ?>
+
+                </div>
+
+            </div>
+            <!-- /News -->
+
+
+        </div>
+        <!-- /BODY -->
+
         <?php
-          if ($cont)
-            for($i = 0; $i<3 && ($cont = $cont && the_horizontal_thumbnail()); $i++);
-        ?>
-      </div>
-    </div>
-
-    <!-- SECTION 7: -->
-    <?php
-      if ($cont)
-        $cont = $cont && the_vertical_thumbnail_row();
-    ?>
-
-</main>
-
-<?php
-else: echo "no posts.";
+        break;
+    endwhile;
+else: echo "No Posts.";
 endif;
-?>
-
-<?php get_footer(); ?>
-
-
+get_footer(); ?>
