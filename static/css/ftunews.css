@@ -746,7 +746,14 @@ a.three-dots:hover
     padding: 25px 15px 15px 15px;
     display: none;
 }
-
+.mega-menu .all {
+    position: absolute;
+    left: 15px;
+    bottom: 15px;
+}
+.mega-menu .all:hover {
+    font-weight: bold;
+}
 .slick-mega {
     height: 100%;
     width: auto;
@@ -1119,7 +1126,7 @@ a.three-dots:hover
     padding-right: 15px;
     max-width: 875px;
 }
-.single-post .category {
+.single-post .cate {
     color: white;
     background: black;
     text-transform: uppercase;
@@ -1146,9 +1153,9 @@ a.three-dots:hover
     margin-top: 16px;
 }
 .main .container.single-post .content {
-    margin: 40px auto 0 auto;
+    margin: 40px auto 96px auto;
     text-align: justify;
-    font-family: "Noto Serif";
+    font-family: "Noto Serif", sans-serif;
     font-size: 16px;
 }
 
@@ -1173,17 +1180,49 @@ a.three-dots:hover
     text-align: center;
     font-weight: bold;
 }
-.more .category {
+.more .more-of {
+    margin-right: 15px;
+}
+@media screen and (max-width: 991px) {
+    .more .more-of {
+        display: block;
+        margin: 0 0 10px 0;
+    }
+    .more .text {
+        padding-left: 0;
+    }
+    .more .body .row {
+        padding-bottom: 15px;
+    }
+}
+.more .head .cate,
+.more .head .author {
+    color: black;
+    background: white;
+    border: solid 1px black;
+    padding: 2px 15px;
+}
+.more .head .cate.active,
+.more .head .author.active {
     color: white;
     background: black;
     border: solid 1px black;
     padding: 2px 15px;
 }
-.more .author {
-    color: black;
-    background: white;
-    border: solid 1px black;
-    padding: 2px 15px;
+.more .head .cate:hover,
+.more .head .author:hover {
+    cursor: pointer;
+}
+.more .body {
+    margin-top: 25px;
+    position: relative;
+}
+.more .body .same-author {
+    display: none;
+}
+.more .body .text a{
+    font-size: 14px;
+    line-height: 18px;
 }
 
 .slick-more {
