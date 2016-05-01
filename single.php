@@ -5,117 +5,139 @@
  * @file: single.php
  */
 
-get_header(); ?>
+get_header();
 
+if (have_posts()) : while (have_posts()): the_post();
 
-<?php if (have_posts()) : while(have_posts()): the_post(); ?>
+    /* PREPARATIONS */
+    /* get category */
+    $cats = get_the_category(get_the_ID());
+    $catName = '';
+    $catUrl = '';
+    if (!empty($cats)) {
+        $cat = $cats[count($cats) - 1];
+        $catName = $cat->cat_name;
+        $catUrl = get_category_link($cat->cat_ID);
+    }
 
-<!-- first look -->
-<div class="container-fluid single-bigpic ratio-16-9"
-     style="background-image: url(<?php
-     $has_thumb = true;
-     if (has_post_thumbnail()) the_post_thumbnail_url('large');
-     else {
-        $url = catch_that_image();
-        if (empty($url)) $has_thumb = false;
-        else echo $url;
-     } ?> );">
-  <div class="single-table">
-    <div class="single-tablecell">
-    <div class="single-posthead <?php if (!$has_thumb) echo 'single-text-black'; ?>">
-        <div class="single-category">
-          <?php
-            $category = get_the_category( get_the_ID() );
-            echo $category[0]->cat_name;
-          ?>
-        </div>
-        <h2 class="single-title"><?php the_title() ?></h2>
-        <div class="single-details">
-          by <span class="text-orange"><?php the_author() ?></span> on <?php the_time('F d, Y') ?> at <?php the_time('G:i') ?>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+    ?>
 
-<main class="container single-main" >
-  <div class="row">
-    <div class="col-sm-2 single-aside margin-top-20px"></div>
-    <div class="col-sm-8 margin-top-20px">
-      <div class="single-article">
-          <?php the_content(); ?>
-      </div>
-    </div>
-  </div>
- 
-  <!-- Related -->
-  <div class="single-related">
-    <div class="single-related-head">RELATED</div>
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-8 single-related-body">
-        <div class="single-related-slick">
-
-          <?php
-            $tags = get_the_tags(); // array of objects
-            if ($tags):
-              $tagIDs = array();
-              foreach ($tags as $tag) {
-                $tagIDs[] = $tag->term_id;
-              }
-              $args = array(
-                'posts_per_page' => 10,
-                'tag__in' => $tagIDs,
-                'order' => 'DESC',
-                'orderby' => 'date',
-                'post__not_in' => array($post->ID),
-              );
-              $queryRelated = new WP_Query($args);
-              //echo "cnt = ",count($queryRelated->posts),", ",$tagIDs[0],", ",$tagIDs[1];
-              if ($queryRelated->have_posts()):
-              while ($queryRelated->have_posts()):
-                $queryRelated->the_post();
-          ?>
-          <div>
-            <div class="single-related-item-outer">
-              <a href="<?php the_permalink()?>" class="background-size-position single-related-item"
-                 style="background-image: url(<?php if (has_post_thumbnail()) the_post_thumbnail_url('large');
-                 else echo catch_that_image(); ?>)">
-                <div class="background-dark single-related-item-dark">
-                  <div class="single-related-item-inner">
-                    <?php the_title() ?>
-                  </div>
-                </div>
-              </a>
+    <!-- BODY -->
+    <div class="main">
+        <?php
+        /* write banner */
+        $thumb_url = get_thumbnail_photo_url(get_the_ID());
+        if ($thumb_url):
+            ?>
+            <!-- Banner -->
+            <div class="ratio-wrapper single-banner">
+                <div class="ratio-content img" style="background-image: url(<?php echo $thumb_url ?>)"></div>
             </div>
-          </div>
-          <?php
-              endwhile;
-              else: echo "no related posts.";
-              endif;
-              //wp_reset_query(); // what for??
-            endif;
-          ?>
+            <!-- /Banner -->
+            <?php
+        endif;
+
+        ?>
+
+        <!-- Post -->
+        <div class="container one-post">
+            <!-- Heading -->
+            <div class="title"><?php the_title() ?></div>
+            <div class="detail">
+                <a href="<?php echo $catUrl ?>" class="cate"><?php echo $catName ?></a> | by
+                <b><?php the_author_link() ?></b>, <?php the_time('j \t\h\á\n\g n, Y') ?>
+            </div>
+            <!-- /Heading -->
+
+            <!-- Content -->
+            <div class="content">
+                <?php the_content() ?>
+            </div>
+            <!-- /Content -->
+
+            <!-- More Posts Of -->
+            <div class="more">
+                <div class="head">
+                    <span class="more-of">MORE OF</span><span class="cate active"><?php echo $catName ?></span><span
+                        class="author"><?php the_author() ?></span>
+                </div>
+
+                <div class="body">
+
+                    <div class="row same-cate">
+                        <?php
+                        $posts = get_posts_in_same_category(3);
+                        if ($posts):
+                            foreach ($posts as $post) {
+                                ?>
+                                <div class="col-sm-4">
+                                    <div class="row">
+                                        <div class="col-md-12 col-xs-5 image">
+                                            <div class="ratio-wrapper">
+                                                <div class="ratio-content img"
+                                                     style="background-image: url(<?php echo get_thumbnail_photo_url($post->ID) ?>)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-xs-7 text">
+                                            <h4>
+                                                <b><a href="<?php echo get_permalink($post->ID) ?>"><?php echo $post->post_name ?></a></b>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        else: echo 'No Posts';
+                        endif;
+                        ?>
+                    </div>
+
+                    <div class="row same-author">
+                        <?php
+                        $posts = get_posts_in_same_author(3);
+                        if ($posts):
+                            foreach ($posts as $post) {
+                                ?>
+                                <div class="col-sm-4">
+                                    <div class="row">
+                                        <div class="col-md-12 col-xs-5 image">
+                                            <div class="ratio-wrapper">
+                                                <div class="ratio-content img"
+                                                     style="background-image: url(<?php echo get_thumbnail_photo_url($post->ID) ?>)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-xs-7 text">
+                                            <h4>
+                                                <b><a href="<?php echo get_permalink($post->ID) ?>"><?php echo $post->post_name ?></a></b>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        else: echo "No Posts.";
+                        endif;
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <!-- /More Posts Of -->
         </div>
-        <div class="single-related-prev related-prev fa fa-angle-left"></div>
-        <div class="single-related-next related-next fa fa-angle-right"></div>
-      </div>
+        <!-- /Post -->
+
+
     </div>
-  </div>
-
-  <!-- Facebook Comment -->
-  <div class="single-fbcmt">
-  </div>
-</main>
-
-<?php
-  endwhile;
-  else: ?>
-
-  <p>No posts. :(</p>
-
-<?php endif; ?>
+    <!-- /BODY -->
 
 
+    <?php
+endwhile;
+else: ?>
 
-<?php get_footer(); ?>
+    <p>No posts. :(</p>
+
+    <?php
+endif;
+get_footer(); ?>
