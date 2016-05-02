@@ -45,7 +45,7 @@ if (have_posts()) : while (have_posts()): the_post();
             <div class="title"><?php the_title() ?></div>
             <div class="detail">
                 <a href="<?php echo $catUrl ?>" class="cate"><?php echo $catName ?></a> | by
-                <b><?php the_author_link() ?></b>, <?php the_time('j \t\h\á\n\g n, Y') ?>
+                <b><?php the_author_posts_link() ?></b>, <?php the_time('j \t\h\á\n\g n, Y') ?>
             </div>
             <!-- /Heading -->
 
@@ -58,35 +58,19 @@ if (have_posts()) : while (have_posts()): the_post();
             <!-- More Posts Of -->
             <div class="more">
                 <div class="head">
-                    <span class="more-of">MORE OF</span><span class="cate active"><?php echo $catName ?></span><span
-                        class="author"><?php the_author() ?></span>
+                    <span class="more-of">MORE OF</span>
+                    <span class="cate active"><?php echo $catName ?></span>
+                    <span class="author"><?php the_author() ?></span>
                 </div>
 
                 <div class="body">
 
                     <div class="row same-cate">
                         <?php
-                        $posts = get_posts_in_same_category(3);
-                        if ($posts):
-                            foreach ($posts as $post) {
-                                ?>
-                                <div class="col-sm-4">
-                                    <div class="row">
-                                        <div class="col-md-12 col-xs-5 image">
-                                            <div class="ratio-wrapper">
-                                                <div class="ratio-content img"
-                                                     style="background-image: url(<?php echo get_thumbnail_photo_url($post->ID) ?>)">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 col-xs-7 text">
-                                            <h4>
-                                                <b><a href="<?php echo get_permalink($post->ID) ?>"><?php echo $post->post_name ?></a></b>
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php
+                        $ps = get_posts_in_same_category(3);
+                        if ($ps):
+                            foreach ($ps as $p) {
+                                the_single_more($p);
                             }
                         else: echo 'No Posts';
                         endif;
@@ -95,27 +79,10 @@ if (have_posts()) : while (have_posts()): the_post();
 
                     <div class="row same-author">
                         <?php
-                        $posts = get_posts_in_same_author(3);
-                        if ($posts):
-                            foreach ($posts as $post) {
-                                ?>
-                                <div class="col-sm-4">
-                                    <div class="row">
-                                        <div class="col-md-12 col-xs-5 image">
-                                            <div class="ratio-wrapper">
-                                                <div class="ratio-content img"
-                                                     style="background-image: url(<?php echo get_thumbnail_photo_url($post->ID) ?>)">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 col-xs-7 text">
-                                            <h4>
-                                                <b><a href="<?php echo get_permalink($post->ID) ?>"><?php echo $post->post_name ?></a></b>
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php
+                        $ps = get_posts_in_same_author(3);
+                        if ($ps):
+                            foreach ($ps as $p) {
+                                the_single_more($p);
                             }
                         else: echo "No Posts.";
                         endif;

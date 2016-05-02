@@ -38,7 +38,7 @@ if (have_posts()):
                         <?php the_grid_cell_inner() ?>
                     </div>
                     <!-- /Cell 3 -->
-                    <div class="scroll-box">
+                    <div class="scroll-box" style="padding:0;">
                         <?php if (!have_posts()) break;
                         the_post() ?>
                         <!-- Cell 4 -->
@@ -199,65 +199,17 @@ if (have_posts()):
                 <div class="col-md-8 col-md-pull-4 main-news">
 
                     <?php if (!have_posts()) break;
-                    the_post() ?>
+                    the_post();
+                    the_news_section_1();
 
-                    <section class="section-1">
-                        <header>
-                            <h3 class="title">
-                                <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
-                            </h3>
-                        </header>
-                        <div class="ratio-wrapper">
-                            <div class="ratio-content img"
-                                 style="background-image: url(<?php echo get_thumbnail_photo_url(get_the_ID()) ?>)">
-                            </div>
-                        </div>
-                        <p class="detail">
-                            BY <span class="author"><?php the_author_link() ?></span>
-                            | <?php the_time('j \t\h\á\n\g n, Y') ?>
-                        </p>
-                        <p class="three-dots excerpt">
-                            <?php echo get_the_excerpt() ?>
-                        </p>
-                    </section>
-
-                    <?php
                     for ($i = 0; $i < 5; $i++):
                         if (!have_posts()) break;
                         the_post();
                         ?>
-
                         <hr>
-                        <section>
-                            <div class="cate"><a
-                                    href="<?php get_last_category_url(get_the_ID()) ?>"><?php get_last_category_name(get_the_ID()) ?></a>
-                            </div>
-                            <header>
-                                <h3 class="title">
-                                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
-                                </h3>
-                            </header>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img"
-                                             style="background-image: url(<?php echo get_thumbnail_photo_url(get_the_ID()) ?>)">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 text">
-                                    <p class="detail">
-                                        BY <span class="author"><?php the_author_link() ?></span>
-                                        | <?php the_time('j \t\h\á\n\g n, Y') ?>
-                                    </p>
-                                    <p class="three-dots excerpt">
-                                        <?php echo get_the_excerpt() ?>
-                                    </p>
-                                </div>
-                            </div>
-                        </section>
-
-                    <?php endfor; ?>
+                        <?php
+                        the_news_section();
+                    endfor; ?>
 
                 </div>
 

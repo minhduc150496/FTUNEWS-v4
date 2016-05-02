@@ -138,22 +138,120 @@ function get_last_category_url($ID)
     return $catUrl;
 }
 
+/**
+ * Print the Grid Cell Inner
+ */
 function the_grid_cell_inner()
 {
     ?>
     <div class="ratio-wrapper">
-        <div class="ratio-content" style="background-image: url(<?php echo get_thumbnail_photo_url(get_the_ID()) ?>)">
+        <div class="ratio-content">
+            <div class="img" style="background-image: url(<?php echo get_thumbnail_photo_url(get_the_ID()) ?>)"></div>
+        </div>
+        <a href="<?php the_permalink() ?>" class="d-block table-wrapper">
             <div class="d-table">
                 <div class="table-cell">
-                    <a href="<?php get_last_category_url(get_the_ID()) ?>"
-                       class="cate"><?php echo get_last_category_name(get_the_ID()) ?></a>
+                    <span class="cate"><?php echo get_last_category_name(get_the_ID()) ?></span>
                     <?php if (get_the_time('d m Y') == date('d m Y')): ?>
                         <div class="new">NEW</div>
                     <?php endif; ?>
-                    <a href="<?php the_permalink()?>" class="three-dots title">
+                    <div class="three-dots title">
                         <?php the_title() ?>
-                    </a>
+                    </div>
                 </div>
+            </div>
+        </a>
+    </div>
+    <?php
+}
+
+/**
+ * The normal news section
+ */
+function the_news_section()
+{
+    ?>
+    <section>
+        <div class="cate"><a
+                href="<?php echo get_last_category_url(get_the_ID()) ?>"><?php echo get_last_category_name(get_the_ID()) ?></a>
+        </div>
+        <header>
+            <h3 class="title">
+                <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+            </h3>
+        </header>
+        <div class="row">
+            <div class="col-sm-6">
+                <a href="<?php the_permalink() ?>" class="ratio-wrapper">
+                    <div class="ratio-content img"
+                         style="background-image: url(<?php echo get_thumbnail_photo_url(get_the_ID()) ?>)">
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-6 text">
+                <p class="detail">
+                    BY <span class="author"><?php the_author_link() ?></span>
+                    | <?php the_time('j \t\h\á\n\g n, Y') ?>
+                </p>
+                <p class="three-dots excerpt">
+                    <?php echo get_the_excerpt() ?>
+                </p>
+            </div>
+        </div>
+    </section>
+    <?php
+}
+
+/**
+ * The news section-1
+ */
+function the_news_section_1()
+{
+    ?>
+    <section class="section-1">
+        <div class="cate"><a
+                href="<?php echo get_last_category_url(get_the_ID()) ?>"><?php echo get_last_category_name(get_the_ID()) ?></a>
+        </div>
+        <header>
+            <h3 class="title">
+                <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+            </h3>
+        </header>
+        <a href="<?php the_permalink() ?>" class="ratio-wrapper">
+            <div class="ratio-content img"
+                 style="background-image: url(<?php echo get_thumbnail_photo_url(get_the_ID()) ?>)">
+            </div>
+        </a>
+        <p class="detail">
+            BY <span class="author"><?php the_author_link() ?></span>
+            | <?php the_time('j \t\h\á\n\g n, Y') ?>
+        </p>
+        <p class="three-dots excerpt">
+            <?php echo get_the_excerpt() ?>
+        </p>
+    </section>
+    <?php
+}
+
+/**
+ * The single more post
+ */
+function the_single_more($post)
+{
+    ?>
+    <div class="col-sm-4">
+        <div class="row">
+            <div class="col-md-12 col-xs-5 image">
+                <a href="<?php echo get_permalink($post->ID) ?>" class="ratio-wrapper">
+                    <div class="ratio-content img"
+                         style="background-image: url(<?php echo get_thumbnail_photo_url($post->ID) ?>)">
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-12 col-xs-7 text">
+                <h4>
+                    <b><a href="<?php echo get_permalink($post->ID) ?>"><?php echo $post->post_name ?></a></b>
+                </h4>
             </div>
         </div>
     </div>
@@ -208,15 +306,16 @@ function get_posts_in_same_author($postsNumber)
 /**
  * @return array of root categories
  */
-function get_root_categories() {
+function get_root_categories()
+{
     $uncat = get_cat_ID('Uncategorized');
-    $args = array (
+    $args = array(
         'hide_empty' => false,
         'exclude' => array($uncat)
     );
     $cats = get_categories($args);
     $res = array();
-    foreach($cats as $cat) {
+    foreach ($cats as $cat) {
         $p = get_category_parents($cat->cat_ID, false, '', false);
         if ($p == $cat->cat_name) array_push($res, $cat);
     }
@@ -228,8 +327,9 @@ function get_root_categories() {
  * @param $ID
  * @return array|WP_Error
  */
-function get_children_categories($ID) {
-    $res = get_term_children($ID,'category');
+function get_children_categories($ID)
+{
+    $res = get_term_children($ID, 'category');
     return $res;
 }
 

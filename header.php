@@ -120,7 +120,7 @@ foreach ($cats as $cat) {
                 foreach ($cats as $cat):
                     ?>
                     <li class="menu-item">
-                        <a class="item-a" href="<?php echo get_category_link($cat->cat_ID) ?>"><?php echo $cat->cat_name ?></a>
+                        <a href="<?php echo get_category_link($cat->cat_ID) ?>"><?php echo $cat->cat_name ?></a>
                         <div class="mega-menu clear">
                             <!-- sub menu -->
                             <div class="sub-menu">
@@ -175,28 +175,24 @@ foreach ($cats as $cat) {
     <div class="mobi-menu">
         <div class="btn btn-link btn-harmburger"><i class="fa fa-bars"></i></div>
         <ul class="body">
+            <?php
+                $cats = get_root_categories();
+                foreach ($cats as $cat):
+            ?>
             <li>
-                <a href="#">CHUYỂN ĐỘNG FTU2</a>
+                <a href="<?php echo get_category_link($cat->cat_ID) ?>"><?php echo $cat->cat_name ?></a>
                 <ul>
+                    <?php
+                    $subs = get_children_categories($cat->cat_ID);
+                    foreach ($subs as $sub):
+                    ?>
                     <li>
-                        <a href="#">FTUCHARM</a>
+                        <a href="<?php echo get_category_link($sub) ?>"><?php echo get_cat_name($sub)?></a>
                     </li>
-                    <li>
-                        <a href="#">FTUSHINE</a>
-                    </li>
+                    <?php endforeach ?>
                 </ul>
             </li>
-            <li>
-                <a href="#">CẢM THỨC</a>
-                <ul>
-                    <li>
-                        <a href="#">CÀ PHÊ THƯ</a>
-                    </li>
-                    <li>
-                        <a href="#">TRÀ ĐÁ THƯ</a>
-                    </li>
-                </ul>
-            </li>
+            <?php endforeach;?>
         </ul>
     </div>
     <!-- /Mobi menu -->

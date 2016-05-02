@@ -137,60 +137,16 @@ get_header();
 
             <!-- main -->
             <div class="col-md-8 col-md-pull-4">
-                <?php if (have_posts()): the_post();
-                    ?>
+                <?php if (have_posts()):
+                    the_post();
+                    the_news_section_1();
 
-                    <section class="section-1">
-                        <header>
-                            <h3 class="title">
-                                <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
-                            </h3>
-                        </header>
-                        <div class="ratio-wrapper">
-                            <div class="ratio-content img"
-                                 style="background-image: url(<?php echo get_thumbnail_photo_url(get_the_ID()) ?>)">
-                            </div>
-                        </div>
-                        <p class="detail">
-                            BY <span class="author"><?php the_author_link() ?></span>
-                            | <?php the_time('j \t\h\á\n\g n, Y') ?>
-                        </p>
-                        <p class="three-dots excerpt">
-                            <?php echo get_the_excerpt() ?>
-                        </p>
-                    </section>
-
-                    <?php while (have_posts()): the_post();
+                    while (have_posts()): the_post();
                         ?>
-
                         <hr>
-                        <section>
-                            <header>
-                                <h3 class="title">
-                                    <a href="<?php the_permalink() ?>"><?php the_title() ?></a>
-                                </h3>
-                            </header>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="ratio-wrapper">
-                                        <div class="ratio-content img"
-                                             style="background-image: url(<?php echo get_thumbnail_photo_url(get_the_ID()) ?>)">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <p class="detail">
-                                        BY <span class="author"><?php the_author_link() ?></span>
-                                        | <?php the_time('j \t\h\á\n\g n, Y') ?>
-                                    </p>
-                                    <p class="three-dots excerpt">
-                                        <?php echo get_the_excerpt() ?>
-                                    </p>
-                                </div>
-                            </div>
-                        </section>
 
                         <?php
+                        the_news_section();
                     endwhile;
                 else: echo "No Posts.";
                 endif;
